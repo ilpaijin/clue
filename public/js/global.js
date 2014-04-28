@@ -1,5 +1,10 @@
 var yir = yir || {};
 
+yir.config = {
+    appServer: 'http://localhost:3000'
+}
+
+//Backgrounder
 yir.Backgrounder = {
     imgsPrefix: "amsterdam-",
     imgsCount: 4

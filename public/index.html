@@ -23,7 +23,16 @@
         </form>        
     </div>
     <script>
-
+        var socket = io(yir.config.appServer);
+        
+        socket.on("connect", function()
+        {
+            console.info("connected");
+            socket.on("event", function(data)
+            {
+                console.info(data);
+            });
+        });
     </script>
 </body>
 </html>
