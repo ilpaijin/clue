@@ -1,0 +1,29 @@
+html {
+    background: url("../img/amsterdam-1.jpg") no-repeat center center fixed; 
+    -webkit-background-size: cover; /* For WebKit*/
+    -moz-background-size: cover;    /* Mozilla*/
+    -o-background-size: cover;      /* Opera*/
+    background-size: cover; 
+}
+
+.title {
+    color: rgba(0,0,0, 1);
+    font-family: 'Advent Pro', 'sans-serif';
+    line-height: 46px;
+    font-size: 84px;
+    margin: 0 0 23px 0;
+}
+small {
+    background-color: rgba(0,0,0,0.5);
+    color:#FFF;
+    font-family: 'Oxygen', 'sans-serif';
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 23px;
+    margin: 0 0 23px 0;
+    padding:3px;
+}
+
+.search {
+    background-color: rgba(240,230,140,0.3); // I don't know the .well color, so I used white as example
+}
