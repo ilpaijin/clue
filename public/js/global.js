@@ -1,7 +1,8 @@
 var yir = yir || {};
 
 yir.config = {
-    appServer: 'http://localhost:3000'
+    NodeAppServer: 'http://localhost:3001',
+    GoAppServer: 'http://localhost:3000'
 }
 
 //Backgrounder

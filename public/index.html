@@ -20,17 +20,21 @@
         <form action="../src/service.php" class="well form-inline">
             <input type="text" class="form-control" placeholder="enter location" name="s">
             <input type="submit" value="search" class="btn btn-success btn-large">       
-        </form>        
+        </form>    
+        <div id="appendedContainer">
+            
+        </div>    
     </div>
     <script>
-        var socket = io(yir.config.appServer);
+        var socket = io.connect(yir.config.NodeAppServer);
         
         socket.on("connect", function()
         {
-            console.info("connected");
             socket.on("event", function(data)
             {
                 console.info(data);
+                $('#appendedContainer').append("<div class='appended io-"+data.id+"'>"+data.data+"</div>");
+
             });
         });
     </script>

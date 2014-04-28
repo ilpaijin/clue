@@ -26,3 +26,13 @@ small {
 }
 
 .form-inline .form-control { width:250px; }
+
+#appendedContainer {
+    clear:both;
+}
+.appended {
+    background:rgba(255,255,255,0.6);
+    float:left;
+    margin:10px;
+    padding:20px;
+}
