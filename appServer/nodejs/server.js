@@ -3,8 +3,7 @@ var http = require("http"),
     sockjs_echo = require("sockjs").createServer(),
     sockjs_broadcast = require("sockjs").createServer(),
     redis = require("redis"),
-    redisPublisher = redis.createClient(),
-    util = require('util');
+    redisPublisher = redis.createClient();
 
 sockjs_echo.on("connection", function(socket) {
 

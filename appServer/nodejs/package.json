@@ -1,0 +1,7 @@
+{
+    "name": "yir-maybecast",
+    "dependencies": {
+        "sockjs": "0.3.8",
+        "redis": "0.10.1"
+    }
+}
