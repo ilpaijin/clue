@@ -28,7 +28,7 @@
         <div id="currentImgDescription"></div>
     </div>
     <script>
-        var socket = new SockJS(yir.config.NodeAppServer);
+        var socket = new SockJS(yir.config.NodeAppServer[location.host]);
         
         socket.onopen = function()
         {
