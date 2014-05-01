@@ -15,12 +15,15 @@ sockjs_echo.on("connection", function(socket) {
 
 sockjs_broadcast.on("connection", function(socket) {
 
+    //welcome the new socket
     socket.write(JSON.stringify({
         myId: socket.id
     }));
 
+    // welcome the others
     redisPublisher.publish("nuovo.socket", socket.id);
 
+    //add it to the redis channel 
     var r = redis.createClient();
 
     r.subscribe("nuovo.socket");
@@ -29,20 +32,6 @@ sockjs_broadcast.on("connection", function(socket) {
             newId: msg
         }))
     });
-
-    // client.hkeys("io.clients", function(err, keys) {
-    //     keys.forEach(function(key, i) {
-    //         key = JSON.parse(key);
-    //         key.write({
-    //             id: socket.id
-    //         });
-    //     });
-    // });
-
-
-    // client.hset("io.clients", socket.id, socket);
-    // client.hincrby("io.clients", "length", 1);
-
 });
 
 sockjs_echo.installHandlers(server, {

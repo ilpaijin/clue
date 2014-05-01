@@ -3,31 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Yesterday it rained</title>
+    <title>C.L.U.E.</title>
     <link href='http://fonts.googleapis.com/css?family=Advent+Pro:700|Oxygen:300' rel='stylesheet' type='text/css'>
-
-
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="public/css/style.css">
+
     <script src="public/js/global.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1-rc2/jquery.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-    <!--  <script src="public/js/vendor/github.com/LearnBoost/socket.io-client/socket.io.js"></script> -->
     <script src="http://cdn.sockjs.org/sockjs-0.3.min.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 </head>
 <body class="search jumbotron">
     <div class="container">
         <div class="row title">
-            Yesterday it rained <span class="glyphicon glyphicon-flag"></span>
-            <small> (maybe)cast weather</small>
+            C.L.U.E. <span class="glyphicon glyphicon-flag"></span>
+            <small> CompLetely UsEless</small>
         </div>
-        <form action="../src/service.php" class="well form-inline">
-            <input type="text" class="form-control" placeholder="enter location" name="s">
+        <form id="search" action="../src/service.php" class="well form-inline">
+            <input type="text" class="form-control" placeholder="enter location" id="place" name="place">
             <input type="submit" value="search" class="btn btn-success btn-large">       
         </form>    
-        <div id="appendedContainer">
-            
-        </div>    
+        <div id="appendedContainer"></div>    
+        <div id="currentImgDescription"></div>
     </div>
     <script>
         var socket = new SockJS(yir.config.NodeAppServer);
@@ -41,8 +39,6 @@
         {
             var data = JSON.parse(msg.data);
 
-            // socket.send(JSON.stringify({client_id: data.id}));
-            
             if(data.myId)
             {
                 $('#appendedContainer').append("<div class='appended me io-"+data.myId+"'>Me "+data.myId+"</div>");
@@ -55,12 +51,47 @@
             console.info(a);
         };
 
-        // socket.onmessage = function(msg){ 
-        //     var div  = document.createElement("div");
-        //     div.innerHTML = "ciao ciao";
-        //     document.body.appendChild(div);
-        //     $('#appendedContainer').append("<div class='appended other io-"+msg.client_id+"'>other client "+msg.client_id+"</div>");
-        // };
+    </script>
+
+
+    <script type="text/javascript">
+        
+        google.load("search", "1");
+
+        function searchComplete()
+        {
+            if (imageSearch.results && imageSearch.results.length > 0)
+            {
+                var choosenOne = imageSearch.results[Object.keys(imageSearch.results).pop()];
+                console.info(choosenOne);
+                document.getElementsByTagName("html")[0].style.background = 'url("' + choosenOne.url + '") no-repeat center center fixed';
+
+                document.getElementById("currentImgDescription").innerHTML = choosenOne.title;
+            }
+        }
+
+        function OnLoad()
+        {
+            imageSearch = new google.search.ImageSearch();
+
+            imageSearch.setRestriction(
+                google.search.ImageSearch.RESTRICT_IMAGESIZE,
+                google.search.ImageSearch.IMAGESIZE_EXTRA_LARGE
+            );
+
+            imageSearch.setSearchCompleteCallback(this, searchComplete, null);
+
+            imageSearch.execute($('#place').val());
+        }
+
+        $('#search').submit(function(e)
+        {
+            e.preventDefault();
+
+            OnLoad();
+
+            // google.setOnLoadCallback(OnLoad);
+        });
     </script>
 </body>
 </html>
