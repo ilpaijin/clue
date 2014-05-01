@@ -12,11 +12,15 @@
     <script src="public/js/global.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1-rc2/jquery.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-    <script src="public/js/vendor/github.com/LearnBoost/socket.io-client/socket.io.js"></script>
+    <!--  <script src="public/js/vendor/github.com/LearnBoost/socket.io-client/socket.io.js"></script> -->
+    <script src="http://cdn.sockjs.org/sockjs-0.3.min.js"></script>
 </head>
 <body class="search jumbotron">
     <div class="container">
-        <div class="title">Yesterday it rained <span class="glyphicon glyphicon-flag"></span> <small> A (maybe)cast weather app</small></div>
+        <div class="row title">
+            Yesterday it rained <span class="glyphicon glyphicon-flag"></span>
+            <small> (maybe)cast weather</small>
+        </div>
         <form action="../src/service.php" class="well form-inline">
             <input type="text" class="form-control" placeholder="enter location" name="s">
             <input type="submit" value="search" class="btn btn-success btn-large">       
@@ -26,17 +30,37 @@
         </div>    
     </div>
     <script>
-        var socket = io.connect(yir.config.NodeAppServer);
+        var socket = new SockJS(yir.config.NodeAppServer);
         
-        socket.on("connect", function()
+        socket.onopen = function()
         {
-            socket.on("event", function(data)
-            {
-                console.info(data);
-                $('#appendedContainer').append("<div class='appended io-"+data.id+"'>"+data.data+"</div>");
+            // console.info("open");
+        };
+         
+        socket.onmessage = function(msg)
+        {
+            var data = JSON.parse(msg.data);
 
-            });
-        });
+            // socket.send(JSON.stringify({client_id: data.id}));
+            
+            if(data.myId)
+            {
+                $('#appendedContainer').append("<div class='appended me io-"+data.myId+"'>Me "+data.myId+"</div>");
+            } else {
+                $('#appendedContainer').append("<div class='appended other io-"+data.id+"'>Someone new "+data.id+"</div>");
+            }
+        };
+
+        socket.onclose = function(a){
+            console.info(a);
+        };
+
+        // socket.onmessage = function(msg){ 
+        //     var div  = document.createElement("div");
+        //     div.innerHTML = "ciao ciao";
+        //     document.body.appendChild(div);
+        //     $('#appendedContainer').append("<div class='appended other io-"+msg.client_id+"'>other client "+msg.client_id+"</div>");
+        // };
     </script>
 </body>
 </html>

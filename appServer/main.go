@@ -1,32 +1,34 @@
 package main
 
 import (
-	"code.google.com/p/go.net/websocket"
 	"fmt"
+	"gopkg.in/igm/sockjs-go.v1/sockjs"
+	"log"
 	"net/http"
 )
 
-func webHandler(ws *websocket.Conn) {
-	var in []byte
-	if err := websocket.Message.Receive(ws, &in); err != nil {
-		fmt.Println(err.Error())
-	}
-	fmt.Printf("Received: %s\n", string(in))
-	websocket.Message.Send(ws, in)
-}
+func EchoHandler(conn sockjs.Conn) {
+	log.Println("Session created")
 
-func RRHandler(w http.ResponseWriter, req *http.Request) {
-	s := websocket.Server{Handler: websocket.Handler(webHandler)}
-	s.ServeHTTP(w, req)
+	m := []byte{'p', 'a', 'i', 'o'}
+
+	fmt.Printf("%v", m)
+
+	conn.WriteMessage(m)
+
+	for {
+		if msg, err := conn.ReadMessage(); err == nil {
+			fmt.Printf("%v", msg)
+			go conn.WriteMessage(msg)
+		} else {
+
+			return
+		}
+	}
+
 }
 
 func main() {
-
-	http.HandleFunc("/", RRHandler)
-
-	err := http.ListenAndServe(":3000", nil)
-
-	if err != nil {
-		panic("ListenAndServe" + err.Error())
-	}
+	sockjs.Install("/echo", EchoHandler, sockjs.DefaultConfig)
+	http.ListenAndServe(":3000", nil)
 }

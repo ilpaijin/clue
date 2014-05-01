@@ -1,18 +1,38 @@
 var http = require("http"),
-    app = http.createServer(HTTPHandler),
-    io = require("socket.io").listen(app);
+    server = http.createServer(),
+    sockjs_echo = require("sockjs").createServer(),
+    sockjs_broadcast = require("sockjs").createServer(),
+    broadcastList = {};
 
-function HTTPHandler(req, res) {
-    res.write("ciao");
-    res.end();
-}
+sockjs_echo.on("connection", function(socket) {
 
-io.sockets.on("connection", function(socket) {
-    // console.info(socket.id);
-    socket.emit("event", {
-        id: socket.id,
-        data: "dati da appServer"
-    });
+    console.info(socket.headers["user-agent"]);
+    socket.write(JSON.stringify({
+        id: socket.id
+    }));
 });
 
-app.listen(3001);
+sockjs_broadcast.on("connection", function(socket) {
+
+    socket.write(JSON.stringify({
+        myId: socket.id
+    }));
+
+    for (var id in broadcastList) {
+        broadcastList[id].write(JSON.stringify({
+            id: socket.id
+        }));
+    }
+
+    broadcastList[socket.id] = socket;
+});
+
+sockjs_echo.installHandlers(server, {
+    prefix: '/echo'
+});
+
+sockjs_broadcast.installHandlers(server, {
+    prefix: '/broadcast'
+});
+
+server.listen(3001);

@@ -1,11 +1,11 @@
 var yir = yir || {};
 
 yir.config = {
-    NodeAppServer: 'http://localhost:3001',
-    GoAppServer: 'http://localhost:3000'
+    NodeAppServer: 'http://192.168.178.15:3001/broadcast',
+    GoAppServer: 'http://localhost:3000/echo'
 }
 
-//Backgrounder
+// Backgrounder
 yir.Backgrounder = {
     imgsPrefix: "amsterdam-",
     imgsCount: 4
