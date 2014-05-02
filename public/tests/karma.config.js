@@ -17,9 +17,10 @@ module.exports = function(config) {
             "../bower_components/angular/angular.min.js",
             "../../public/assets/js/ngApp/*.js",
             "../../public/assets/js/ngApp/**/*.js",
-            // "ngApp/**.*.js"
+            "../../public/assets/js/ngApp/**/**/*.js",
             "lib/angular-mocks.js",
-            "ngApp/controllers/*.test.js"
+            "ngApp/**/*.test.js",
+            "ngApp/**/**/*.test.js"
         ],
 
 
