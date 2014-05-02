@@ -9,15 +9,15 @@ html {
     color: rgba(0,0,0, 1);
     font-family: 'Advent Pro', 'sans-serif';
     line-height: 46px;
-    font-size: 58px;
-    margin: 0 0 23px 0;
+    font-size: 110px;
+    margin: 0 0 20px 0;
 }
 small {
     background:rgba(240,230,140,0.8);
     border-radius: 3px;
     color:#000;
     font-family: 'Oxygen', 'sans-serif';
-    font-size: 14px;
+    font-size: 28px;
     padding:3px 9px;
 }
 
@@ -31,21 +31,21 @@ small {
     clear:both;
 }
 .appended {
+    border-radius:30px;
+    color:#FFF;
     float:left;
+    font-size:11px;
     margin:10px;
     padding:20px;
 }
 .appended.me {
-    background:rgba(255,0,0,0.6);
-    float:left;
-    margin:10px;
-    padding:20px;
+    background:rgba(163,211,156,0.8);
 }
 .appended.other {
-    background:rgba(0,255,0,0.6);
-    float:left;
-    margin:10px;
-    padding:20px;
+    background:rgba(125,167,217,0.8);
+}
+.appended.queries {
+    background:rgba(55,48,45,0.6);
 }
 
 #currentImgDescription {

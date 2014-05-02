@@ -29,8 +29,18 @@ sockjs_broadcast.on("connection", function(socket) {
     r.subscribe("nuovo.socket");
     r.on("message", function(channel, msg) {
         socket.write(JSON.stringify({
-            newId: msg
+            channel: channel,
+            msg: msg
         }))
+    });
+
+    r.subscribe("queries");
+    //receiving msgs
+    socket.on("data", function(q) {
+        redisPublisher.publish("queries", JSON.stringify({
+            query: q,
+            socketClientId: socket.id
+        }));
     });
 });
 

@@ -19,51 +19,26 @@
     <script src="https://www.google.com/jsapi" type="text/javascript"></script>
 
 </head>
-<body class="search jumbotron">
-    <div class="container">
+<body class="search jumbotron" ng-cloak>
+    <div class="container" ng-controller="SomeCtrl">
         <div class="row title">
-            C.L.U.E. <span class="glyphicon glyphicon-flag"></span>
+            C.L.U.E. 
+            <span class="glyphicon glyphicon-flag"></span>
             <small> CompLetely UsEless</small>
         </div>
         <form id="search" action="../src/service.php" class="well form-inline">
-            <input type="text" class="form-control" placeholder="enter location" id="place" name="place">
-            <input type="submit" value="search" class="btn btn-success btn-large">       
+            <input type="text" class="form-control" placeholder="enter some word" id="place" name="place" ng-model="query">
+            <input type="submit" value="search" class="btn btn-success btn-large" ng-click="check(query)">    
         </form>    
         <div id="appendedContainer"></div>    
         <div id="currentImgDescription"></div>
 
-        <p ng-controller="SomeCtrl">{{'yet'}} {{user.name}}</p>
+        <p></p>
 
     </div>
 
     <script src="public/assets/js/ngApp/app.js"></script>
-
-    <script>
-        var socket = new SockJS(clue.config.NodeAppServer[location.host]);
-        
-        socket.onopen = function()
-        {
-            // console.info("open");
-        };
-         
-        socket.onmessage = function(msg)
-        {
-            var data = JSON.parse(msg.data);
-
-            if(data.myId)
-            {
-                $('#appendedContainer').append("<div class='appended me io-"+data.myId+"'>Me "+data.myId+"</div>");
-            } else {
-                $('#appendedContainer').append("<div class='appended other io-"+data.newId+"'>Someone new "+data.newId+"</div>");
-            }
-        };
-
-        socket.onclose = function(a){
-            console.info(a);
-        };
-
-    </script>
-
+    <script src="public/assets/js/ngApp/controllers/someCtrl.js"></script>
 
     <script type="text/javascript">
         
