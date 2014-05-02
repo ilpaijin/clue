@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" ng-app="clueApp">
+<html lang="en" ng-app="clueApp" clue-dyno-background>
 <head>
 
     <meta charset="UTF-8">
@@ -13,7 +13,6 @@
 
     <script src="public/bower_components/angular/angular.min.js" type="text/javascript"></script>
 
-    <script src="public/assets/js/global.js" type="text/javascript"></script>
     <script src="public/bower_components/jquery/dist/jquery.min.js" type="text/javascript"></script>
     <script src="public/bower_components/sockjs/sockjs.min.js" type="text/javascript"></script>
     <script src="https://www.google.com/jsapi" type="text/javascript"></script>
@@ -26,9 +25,9 @@
             <span class="glyphicon glyphicon-flag"></span>
             <small> CompLetely UsEless</small>
         </div>
-        <form id="search" action="../src/service.php" class="well form-inline">
+        <form id="search" action="../src/service.php" class="well form-inline" ng-submit="check(query)">
             <input type="text" class="form-control" placeholder="enter some word" id="place" name="place" ng-model="query">
-            <input type="submit" value="search" class="btn btn-success btn-large" ng-click="check(query)">    
+            <input type="submit" value="search" class="btn btn-success btn-large">    
         </form>    
         <div id="appendedContainer"></div>    
         <div id="currentImgDescription"></div>
@@ -38,6 +37,14 @@
     </div>
 
     <script src="public/assets/js/ngApp/app.js"></script>
+
+    <script src="public/assets/js/ngApp/constants/config/websocket.js"></script>
+    <script src="public/assets/js/ngApp/constants/config/dynoBackground.js"></script>
+    
+    <script src="public/assets/js/ngApp/directives/dynoBackground.js"></script>
+
+    <script src="public/assets/js/ngApp/services/websocket.js"></script>
+
     <script src="public/assets/js/ngApp/controllers/someCtrl.js"></script>
 
     <script type="text/javascript">
