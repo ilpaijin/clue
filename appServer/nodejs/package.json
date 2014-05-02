@@ -3,5 +3,9 @@
     "dependencies": {
         "sockjs": "0.3.8",
         "redis": "0.10.1"
+    },
+    "devDependencies": {
+        "karma": "~0.10",
+        "karma-jasmine": "~0.1.0"
     }
 }
