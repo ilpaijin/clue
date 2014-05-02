@@ -3,7 +3,7 @@
 clueApp.controller('SomeCtrl', ['$scope', "clue_websocket",
     function($scope, ws) {
 
-        $scope.check = function(query) {
+        $scope.publishInWebsocket = function(query) {
             ws.send(query);
         };
 
