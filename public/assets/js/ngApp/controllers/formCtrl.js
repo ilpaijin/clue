@@ -1,6 +1,6 @@
 'use strict';
 
-clueApp.controller('SomeCtrl', ['$scope', "clue_websocket",
+clueApp.controller('FormCtrl', ['$scope', "clue_websocket",
     function($scope, ws) {
 
         $scope.publishInWebsocket = function(query) {

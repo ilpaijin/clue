@@ -1,11 +1,11 @@
-describe("SomeCtrl", function() {
+describe("FormCtrl", function() {
     var scope, ctrl;
 
     beforeEach(module("clueApp"));
 
     beforeEach(inject(function($controller) {
         scope = {};
-        ctrl = $controller("SomeCtrl", {
+        ctrl = $controller("FormCtrl", {
             $scope: scope
         });
     }));
