@@ -1,9 +1,9 @@
 'use strict';
 
-clueApp.factory("clue_websocket", ["config_webservice",
-    function(cfg_ws) {
+clueApp.factory("clue_websocket", ["WEBSOCKET_CONFIG",
+    function(WEBSOCKET_CONFIG) {
 
-        var wsocket = new SockJS(cfg_ws.NodeAppServer[location.host]);
+        var wsocket = new SockJS(WEBSOCKET_CONFIG.NodeAppServer[location.host]);
 
         wsocket.onopen = function() {
             // console.info("open");
