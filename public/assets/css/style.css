@@ -1,10 +1,10 @@
 html {
-    -webkit-background-size: cover; /* For WebKit*/
-    -moz-background-size: cover;    /* Mozilla*/
-    -o-background-size: cover;      /* Opera*/
+    /*-webkit-background-size: cover; 
+    -moz-background-size: cover;    
+    -o-background-size: cover; 
     background-size: cover; 
     background-repeat:no-repeat;
-    background-position: center;
+    background-position: center;*/
 }
 
 .title {
