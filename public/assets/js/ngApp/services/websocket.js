@@ -1,15 +1,13 @@
 'use strict';
 
-clueApp.factory("clue_websocket", ["WEBSOCKET_CONFIG",
+clueApp.factory("websocket", ["WEBSOCKET_CONFIG",
+
     function(WEBSOCKET_CONFIG) {
 
-        var wsocket = new SockJS(WEBSOCKET_CONFIG.NodeAppServer[location.host]);
+        var broadcastSocket = new SockJS(WEBSOCKET_CONFIG.NodeAppServer[location.host].broadcast);
 
-        wsocket.onopen = function() {
-            // console.info("open");
-        };
 
-        wsocket.onmessage = function(msg) {
+        broadcastSocket.onmessage = function(msg) {
             var data = JSON.parse(msg.data);
 
             if (data.channel == "queries") {
@@ -25,12 +23,10 @@ clueApp.factory("clue_websocket", ["WEBSOCKET_CONFIG",
             }
         };
 
-        wsocket.onclose = function(a) {
+        broadcastSocket.onclose = function(a) {
             // console.info(a);
         };
 
-        var service = wsocket;
-
-        return service;
+        return broadcastSocket;
     }
 ]);
