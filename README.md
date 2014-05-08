@@ -1,5 +1,8 @@
-#Yesterday it rained
-##A (maybe)cast meteo app
+#C.L.U.E. 
+##CompleteLy UsEless
+
+### AmazonAWS Demo
+> http://54.72.77.96/clue/
 
 ### forecast.io
 > <dl> 
